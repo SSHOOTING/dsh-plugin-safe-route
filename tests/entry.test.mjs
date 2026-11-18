@@ -2,13 +2,12 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { name, inject, apply } from '../lib/index.js'
 
-function makeCtx(config) {
+function makeCtx() {
   const registered = []
   const logs = []
   return {
     registered,
     logs,
-    config,
     commands: { register: (command) => registered.push(command) },
     logger: { info: (m) => logs.push(m) },
   }
@@ -20,20 +19,16 @@ test('entry exports the bundle name and injects only commands', () => {
 })
 
 test('apply registers /route-check once', () => {
-  const ctx = makeCtx(undefined)
+  const ctx = makeCtx()
   apply(ctx)
   assert.equal(ctx.registered.length, 1)
   assert.equal(ctx.registered[0].name, 'route-check')
   assert.match(ctx.logs[0], /loaded/)
 })
 
-test('handler audits the session with the patched allowlist', () => {
-  const ctx = makeCtx({
-    'dsh-plugin-safe-route': {
-      policy: { allow: [{ provider: 'my-provider', model: 'free-1' }] },
-    },
-  })
-  apply(ctx)
+test('handler audits the session with the patched allowlist from apply(ctx, config)', () => {
+  const ctx = makeCtx()
+  apply(ctx, { policy: { allow: [{ provider: 'my-provider', model: 'free-1' }] } })
   const command = ctx.registered[0]
   const result = command.handler({
     agent: {
@@ -52,7 +47,7 @@ test('handler audits the session with the patched allowlist', () => {
 })
 
 test('handler supports --json and survives missing sessions', () => {
-  const ctx = makeCtx(undefined)
+  const ctx = makeCtx()
   apply(ctx)
   const command = ctx.registered[0]
   const json = command.handler({ agent: {}, rawInput: '--json' })

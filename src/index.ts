@@ -17,13 +17,12 @@ interface CommandContext {
     }): unknown
   }
   logger?: { info?: (message: string) => void; warn?: (message: string) => void }
-  config?: Record<string, unknown>
 }
 
-function readPolicy(ctx: CommandContext): Policy {
-  const own = ctx.config?.[name]
-  if (own && typeof own === 'object' && 'policy' in own) {
-    return normalizePolicy((own as Record<string, unknown>).policy)
+/** DSH passes the bundle row's `config` as the second argument to apply(). */
+function readPolicy(config: unknown): Policy {
+  if (config && typeof config === 'object' && 'policy' in config) {
+    return normalizePolicy((config as Record<string, unknown>).policy)
   }
   return DEFAULT_POLICY
 }
@@ -32,8 +31,8 @@ function readPolicy(ctx: CommandContext): Policy {
  * Cordis bundle entry. Registers `/route-check`, a read-only audit of the
  * providers/models used in the current session against a configurable allowlist.
  */
-export function apply(ctx: CommandContext): void {
-  const policy = readPolicy(ctx)
+export function apply(ctx: CommandContext, config?: unknown): void {
+  const policy = readPolicy(config)
 
   ctx.commands.register({
     name: 'route-check',

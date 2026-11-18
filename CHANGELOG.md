@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 (2026-11-18)
+
+- Fix: read the configured allowlist from DSH's `apply(ctx, config)` second argument. Previously the bundle row's `config.policy` was ignored and the default allowlist was always used.
+- Add a regression test that feeds a custom policy through `apply(ctx, config)`.
+
 ## 0.1.0 (2026-11-18)
 
 - Initial release.
