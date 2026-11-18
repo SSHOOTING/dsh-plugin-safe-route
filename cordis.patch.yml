@@ -1,0 +1,12 @@
+# Official bundle layer. `dsh plugin add dsh-plugin-safe-route` applies this row
+# into the profile. Rows resolve by package name so the installed copy is what boots.
+- insert:
+    - id: dsh-plugin-safe-route
+      name: dsh-plugin-safe-route
+      config:
+        policy:
+          allow:
+            - provider: opencode-go
+              model: hy4-flash-free
+            - provider: opencode-go
+              model: longcat-2.5-free
