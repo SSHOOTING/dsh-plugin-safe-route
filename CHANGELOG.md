@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2026-11-18)
+
+- Fix: register `/route-check` through `ctx.effect()` so disable/reload disposes the command instead of leaving a duplicate.
+
 ## 0.1.1 (2026-11-18)
 
 - Fix: read the configured allowlist from DSH's `apply(ctx, config)` second argument. Previously the bundle row's `config.policy` was ignored and the default allowlist was always used.

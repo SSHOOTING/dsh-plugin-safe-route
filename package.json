@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-safe-route",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DSH plugin: audit which providers/models a session actually used and flag routes outside your allowlist. Read-only, no session content leaves the machine.",
   "type": "module",
   "main": "lib/index.js",

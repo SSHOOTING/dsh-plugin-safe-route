@@ -14,8 +14,10 @@ interface CommandContext {
       handler: (args: { agent?: { session?: { events?: readonly unknown[] } }; rawInput?: string }) =>
         | { kind: 'success'; text: string }
         | { kind: 'error'; text: string }
-    }): unknown
+    }): () => void
   }
+  /** Cordis lifecycle scope; registers disposables so disable/reload leaves no duplicate command. */
+  effect?: (body: () => Generator, label?: string) => void
   logger?: { info?: (message: string) => void; warn?: (message: string) => void }
 }
 
@@ -34,7 +36,7 @@ function readPolicy(config: unknown): Policy {
 export function apply(ctx: CommandContext, config?: unknown): void {
   const policy = readPolicy(config)
 
-  ctx.commands.register({
+  const dispose = ctx.commands.register({
     name: 'route-check',
     description: 'Audit model routes used in this session against your allowlist',
     input: { hint: '[--json]' },
@@ -49,6 +51,10 @@ export function apply(ctx: CommandContext, config?: unknown): void {
       }
     },
   })
+
+  if (typeof ctx.effect === 'function') {
+    ctx.effect(function* () { yield dispose }, `${name} lifecycle`)
+  }
 
   ctx.logger?.info?.('[dsh-plugin-safe-route] loaded (read-only; /route-check available)')
 }
