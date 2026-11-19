@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-safe-route",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "DSH plugin: audit which providers/models a session actually used and flag routes outside your allowlist. Read-only, no session content leaves the machine.",
   "type": "module",
   "main": "lib/index.js",
@@ -31,7 +31,8 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "npm run build && node tests/core.test.mjs && node tests/entry.test.mjs",
-    "pack:check": "npm pack --dry-run"
+    "pack:check": "npm pack --dry-run",
+    "prepack": "npm run build"
   },
   "dsh": {
     "bundle": {
