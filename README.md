@@ -102,6 +102,11 @@ Tests are fully offline: synthetic event fixtures, no model or network calls.
 
 ![Demo](docs/demo.png)
 
+
+## Listed in
+
+- [awesome-ai-plugins — DeepSeek Harness Plugins](https://github.com/hashgraph-online/awesome-ai-plugins#deepseek-harness-plugins) (security scan passed).
+
 ## Related plugins
 
 - [dsh-plugin-session-archive](https://github.com/SSHOOTING/dsh-plugin-session-archive)

@@ -97,6 +97,11 @@ npm pack --dry-run
 
 [MIT](LICENSE)
 
+
+## 收录于
+
+- [awesome-ai-plugins — DeepSeek Harness Plugins](https://github.com/hashgraph-online/awesome-ai-plugins#deepseek-harness-plugins)（安全扫描通过）。
+
 ## 相关插件
 
 - [dsh-plugin-session-archive](https://github.com/SSHOOTING/dsh-plugin-session-archive)
