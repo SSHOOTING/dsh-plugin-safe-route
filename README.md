@@ -7,7 +7,7 @@ Cost/context plugins *display* spending after the fact. `safe-route` *judges* th
 ## Install
 
 ```powershell
-dsh plugin add dsh-plugin-safe-route
+dsh plugin --profile web add dsh-plugin-safe-route
 ```
 
 Requires Node `^22.19.0 || >=24` and DSH `>=0.2.0-rc.2 <0.3.0`.
@@ -78,7 +78,7 @@ An invalid or empty `allow` falls back to the default free-route list, so a typo
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| `/route-check` not found | Bundle row not installed | Re-run `dsh plugin add dsh-plugin-safe-route`, then restart DSH. |
+| `/route-check` not found | Bundle row not installed | Re-run `dsh plugin --profile web add dsh-plugin-safe-route`, then restart DSH. |
 | Score is 100 but I used a paid model | The route isn't in `allow` or `deny` | Add an explicit deny rule for it. |
 | `no model calls observed` | No `request/*` events in this session yet | Use the session once, then re-run. |
 | Wrong allowlist | Profile `cordis.patch.yml` overrides the bundle row | The last write wins — edit the profile row, not the package. |
