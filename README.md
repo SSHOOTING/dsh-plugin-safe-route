@@ -100,7 +100,7 @@ Tests are fully offline: synthetic event fixtures, no model or network calls.
 
 ## Demo
 
-![Demo](docs/demo.png)
+![Demo](https://raw.githubusercontent.com/SSHOOTING/dsh-plugin-safe-route/main/docs/demo.png)
 
 
 ## Listed in
